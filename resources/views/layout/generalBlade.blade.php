@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8"/>
-{{--    <title>{{$title ?? __('')}} {{ ($title ?? null) ?"|":""}} {{ config('app.name') }}</title>--}}
+    {{--    <title>{{$title ?? __('')}} {{ ($title ?? null) ?"|":""}} {{ config('app.name') }}</title>--}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="{{ config('app.name') }}" name="description"/>
@@ -25,6 +25,7 @@
     <link rel="stylesheet" href=" {{asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')}}">
     <link rel="stylesheet" href=" {{asset('assets/css/app.css')}}">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.svg')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('assets/vendors/toastify/toastify.css')}}">
     <!-- END GLOBAL MANDATORY STYLES -->
     @livewireStyles
     <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -38,7 +39,12 @@
 <div id="app">
     <x-general.sidebar/>
     <div id="main">
-{{--        <x-general.header title="Profile Statistics"/>--}}
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+        {{--        <x-general.header title="Profile Statistics"/>--}}
         @yield('content')
     </div>
 </div>
@@ -50,10 +56,13 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 <script src="{{asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/vendors/toastify/toastify.js')}}"></script>
+<script src="{{asset('assets/js/extensions/toastify.js')}}"></script>
 {{--<script src="{{asset('assets/vendors/apexcharts/apexcharts.js')}}"></script>--}}
 {{--<script src="{{asset('assets/js/pages/dashboard.js')}}"></script>--}}
 <script src="{{asset('assets/js/main.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
 {{--<script>--}}
 {{--    $.ajaxSetup({--}}
 {{--        headers: {--}}
@@ -61,7 +70,19 @@
 {{--        }--}}
 {{--    });--}}
 {{--</script>--}}
-@livewireScripts
+<script>
+    window.addEventListener('notify', function (data) {
+        Toastify({
+            text           : data.detail.message,
+            duration       : 3000,
+            close          : true,
+            gravity        : 'top',
+            position       : 'right',
+            backgroundColor: data.detail.color,
+        }).showToast();
+    })
+</script>
+    @livewireScripts
 @stack('script')
 </body>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Profile\Show;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('livewire');
+Route::group([
+    'middleware' => 'auth',
+], function () {
+
+    Route::get('/', function () {
+        return view('livewire');
+    })->name('dashboard');
+
+    Route::get('/profile', Show::class)->name('profile.show');
 });
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+
+
+Auth::routes();
+Route::get('/register', function () {
+    return view('auth.register');
+});

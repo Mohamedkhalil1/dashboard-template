@@ -1,22 +1,20 @@
-@props(['title' => null])
-<div class="card card-custom gutter-b">
+@props(['title' => null , 'footer' => null ])
+<div class="card">
     @if ($title)
-        <div class="card-header">
-            <div class="card-title">
-                <h3 class="card-label">{{ $title }}</h3>
+        <div class="card-header ">
+            <div class="card-title divider ">
+                <h4 class="card-title divider-text">{{ $title }}</h4>
             </div>
-            @isset($toolbar)
-                <div class="card-toolbar">
-                    {{$toolbar}}
-                </div>
-            @endisset
         </div>
     @endif
-    <div class="card-body">
-        <div class="row">
-            {{ $slot }}
+    <div class="card-content">
+        <div class="card-body">
+            <div class="row">
+                {{ $slot }}
+            </div>
         </div>
     </div>
+
     @isset($footer)
         <div class="card-footer">
             {{ $footer }}

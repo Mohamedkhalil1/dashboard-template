@@ -1,8 +1,12 @@
-@props(['menuTitle' => null , 'title' => '' , 'url' => '#' , 'status' => 0])
-<li class="sidebar-title">{{$menuTitle}}</li>
-<li class="sidebar-item {{ $status ?  'active' : ''}}">
+<li class="sidebar-item {{ $setIsActive() ?  'active' : '' }} {{ $isSingle ? '' : 'has-sub' }} ">
     <a href="{{ $url }}" class='sidebar-link'>
-        <i class="bi bi-grid-fill"></i>
-        <span>{{$title}}</span>
+        <i class="{{ $icon }}"></i>
+        <span>{{ $title }}</span>
     </a>
+    @if(!$isSingle)
+        <x-general.partial.nesteditems
+            :isActive="$setIsActive()"
+            :items="$items"
+        />
+    @endif
 </li>
