@@ -6,5 +6,5 @@
     @livewireScripts
 @endpush
 @section('content')
-    @livewire('hello-world')
+
 @endsection

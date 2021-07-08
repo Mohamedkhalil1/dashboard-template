@@ -16,8 +16,8 @@
                 [
                     [
                         'title'  => 'Form1',
-                        'url'    => route('profile.show'),
-                        'active' => isActive('profile.show')
+                        'url'    => '#',
+                        'active' => false
                      ],
                      [
                          'title'  => 'Form2',
