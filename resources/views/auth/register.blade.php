@@ -13,7 +13,7 @@
          @livewireStyles
 </head>
 <body>
-@livewire('auth.register')
-@livewireScripts
+    @livewire('auth.register')
+    @livewireScripts
 </body>
 </html>

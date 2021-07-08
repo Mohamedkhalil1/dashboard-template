@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Profile\Show;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,11 +20,9 @@ Route::group([
 
     Route::get('/', function () {
         return view('livewire');
-    });
+    })->name('dashboard');
 
-    Route::get('/profile', function () {
-        return view('profile.show');
-    });
+    Route::get('/profile', Show::class)->name('profile.show');
 });
 
 

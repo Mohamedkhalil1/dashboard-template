@@ -8,7 +8,7 @@ use Livewire\Component;
 class Show extends Component
 {
     public $saved = false;
-    public $name = 'he';
+    public $name;
     public $email;
     public $password;
     public $passwordConfirmation;
@@ -24,33 +24,22 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.profile.show');
+        return view('livewire.profile.show')->extends('layout.generalBlade')->section('content');
     }
 
     public function updated()
     {
         $this->validate([
-            'email' => [Rule::unique('users')->ignore($this->user->id)]
+            'email' => [Rule::unique('users')->ignore($this->user->id)],
         ]);
-        $this->closeNotification();
     }
 
     public function save()
     {
         $this->validation();
-        $this->user->update([
-            'email'    => $this->email,
-            'name'     => $this->name,
-            'password' => bcrypt($this->password),
-        ]);
-        $this->saved = true;
+        $this->updateUser();
+        $this->dispatchBrowserEvent('notify', ['message' => 'Profile Saved!', 'color' => '#4fbe87']);
     }
-
-    public function closeNotification()
-    {
-        $this->saved = false;
-    }
-
 
     private function validation()
     {
@@ -59,6 +48,18 @@ class Show extends Component
             'name'     => ['required', 'string', 'max:255'],
             'password' => ['nullable', 'min:6', 'same:passwordConfirmation'],
         ]);
+    }
+
+    private function updateUser(): void
+    {
+        $this->user->update([
+            'email' => $this->email,
+            'name'  => $this->name,
+        ]);
+        if ($this->password) {
+            $this->user->password = bcrypt($this->password);
+            $this->user->save();
+        }
     }
 }
 

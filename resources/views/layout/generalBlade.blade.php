@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8"/>
-{{--    <title>{{$title ?? __('')}} {{ ($title ?? null) ?"|":""}} {{ config('app.name') }}</title>--}}
+    {{--    <title>{{$title ?? __('')}} {{ ($title ?? null) ?"|":""}} {{ config('app.name') }}</title>--}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="{{ config('app.name') }}" name="description"/>
@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.svg')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{asset('assets/vendors/toastify/toastify.css')}}">
     <!-- END GLOBAL MANDATORY STYLES -->
-
+    @livewireStyles
     <!-- BEGIN PAGE LEVEL PLUGINS -->
 @stack('head')
 <!-- END PAGE LEVEL PLUGINS -->
@@ -37,13 +37,18 @@
 {{--THE BODY--}}
 <body>
 <div id="app">
-    <x-general.sidebar />
+    <x-general.sidebar/>
     <div id="main">
-{{--        <x-general.header title="Profile Statistics"/>--}}
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+        {{--        <x-general.header title="Profile Statistics"/>--}}
         @yield('content')
     </div>
 </div>
-<x-general.footer />
+<x-general.footer/>
 {{--END BODY--}}
 
 <!-- BEGIN CORE PLUGINS -->
@@ -65,7 +70,19 @@
 {{--        }--}}
 {{--    });--}}
 {{--</script>--}}
-
+<script>
+    window.addEventListener('notify', function (data) {
+        Toastify({
+            text           : data.detail.message,
+            duration       : 3000,
+            close          : true,
+            gravity        : 'top',
+            position       : 'right',
+            backgroundColor: data.detail.color,
+        }).showToast();
+    })
+</script>
+    @livewireScripts
 @stack('script')
 </body>
 

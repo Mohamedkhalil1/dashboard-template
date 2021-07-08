@@ -1,9 +1,9 @@
 @props(['title' => null , 'footer' => null ])
 <div class="card">
     @if ($title)
-        <div class="card-header">
-            <div class="card-title">
-                <h4 class="card-title">{{ $title }}</h4>
+        <div class="card-header ">
+            <div class="card-title divider ">
+                <h4 class="card-title divider-text">{{ $title }}</h4>
             </div>
         </div>
     @endif
