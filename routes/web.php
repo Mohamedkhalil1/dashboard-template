@@ -13,9 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('livewire');
+Route::group([
+    'middleware' => 'auth',
+], function () {
+
+    Route::get('/', function () {
+        return view('livewire');
+    });
+
+    Route::get('/profile', function () {
+        return view('profile.show');
+    });
 });
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+
+
+Auth::routes();
+Route::get('/register', function () {
+    return view('auth.register');
+});

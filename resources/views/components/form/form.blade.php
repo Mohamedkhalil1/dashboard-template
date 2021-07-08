@@ -1,12 +1,18 @@
-@props(['successUrl','action','method'=>'post','isEdit' => false,'hasFile' => false])
-<form class="ajax-form"
-      method="{{$method}}"
-      success-url="{{$successUrl}}"
-      action="{{$action}}"
-      enctype="{{$hasFile ? 'multipart/form-data' : ''}}">
+@props([
+    'action'  => '',
+    'method'  => 'post',
+    'isEdit'  => false,
+    'hasFile' => false
+    ])
+<form class="form form-horizontal">
     @csrf
-    @if($isEdit)
-        @method('PATCH')
-    @endif
-    {{ $slot }}
+    <div class="form-body">
+        <div class="row">
+            @if($isEdit)
+                @method('PATCH')
+            @endif
+            {{ $slot }}
+        </div>
+    </div>
+
 </form>

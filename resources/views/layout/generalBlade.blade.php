@@ -25,8 +25,9 @@
     <link rel="stylesheet" href=" {{asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')}}">
     <link rel="stylesheet" href=" {{asset('assets/css/app.css')}}">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.svg')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('assets/vendors/toastify/toastify.css')}}">
     <!-- END GLOBAL MANDATORY STYLES -->
-    @livewireStyles
+
     <!-- BEGIN PAGE LEVEL PLUGINS -->
 @stack('head')
 <!-- END PAGE LEVEL PLUGINS -->
@@ -36,13 +37,13 @@
 {{--THE BODY--}}
 <body>
 <div id="app">
-    <x-general.sidebar/>
+    <x-general.sidebar />
     <div id="main">
 {{--        <x-general.header title="Profile Statistics"/>--}}
         @yield('content')
     </div>
 </div>
-<x-general.footer/>
+<x-general.footer />
 {{--END BODY--}}
 
 <!-- BEGIN CORE PLUGINS -->
@@ -50,10 +51,13 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 <script src="{{asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/vendors/toastify/toastify.js')}}"></script>
+<script src="{{asset('assets/js/extensions/toastify.js')}}"></script>
 {{--<script src="{{asset('assets/vendors/apexcharts/apexcharts.js')}}"></script>--}}
 {{--<script src="{{asset('assets/js/pages/dashboard.js')}}"></script>--}}
 <script src="{{asset('assets/js/main.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
 {{--<script>--}}
 {{--    $.ajaxSetup({--}}
 {{--        headers: {--}}
@@ -61,7 +65,7 @@
 {{--        }--}}
 {{--    });--}}
 {{--</script>--}}
-@livewireScripts
+
 @stack('script')
 </body>
 

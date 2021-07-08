@@ -1,10 +1,10 @@
 @extends('layout.generalBlade')
 @push('head')
-     @livewireStyles
+    @livewireStyles
 @endpush
 @push('script')
     @livewireScripts
 @endpush
 @section('content')
-    @livewire('hello-world')
+    @livewire('profile.show')
 @endsection
