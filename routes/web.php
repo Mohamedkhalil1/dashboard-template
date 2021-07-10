@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Profile\Show;
+use App\Http\Livewire\User\Create;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,18 +20,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
+    'middleware' => 'guest',
+], function () {
+    Route::get('/login', Login::class)->name('login');
+
+    Route::get('/register', Register::class)->name('register');
+});
+
+Route::group([
     'middleware' => 'auth',
 ], function () {
 
-    Route::get('/', function () {
-        return view('livewire');
-    })->name('dashboard');
-
+    Route::get('/', Dashboard::class)->name('dashboard');
     Route::get('/profile', Show::class)->name('profile.show');
+    Route::get('/user/create', Create::class)->name('user.create');
 });
 
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Auth::routes();
-Route::get('/register', function () {
-    return view('auth.register');
-});
+

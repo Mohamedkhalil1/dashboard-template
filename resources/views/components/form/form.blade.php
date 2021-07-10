@@ -1,18 +1,14 @@
-@props([
-    'action'  => '',
-    'method'  => 'post',
-    'isEdit'  => false,
-    'hasFile' => false
-    ])
-<form class="form form-horizontal">
-    @csrf
+@props(['action'  => '' ,'isHorizontal' => false])
+@php
+    $class = $isHorizontal  ? 'form-horizontal' : '';
+@endphp
+<form wire:submit.prevent="{{ $action }}" class="form {{ $class }}">
     <div class="form-body">
         <div class="row">
-            @if($isEdit)
-                @method('PATCH')
-            @endif
             {{ $slot }}
         </div>
     </div>
-
+    <div
+        class="col-md-1 float-left align-center text-center tox-collection__item-container--valign-middle">
+    </div>
 </form>

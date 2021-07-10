@@ -15,14 +15,14 @@
             :items="
                 [
                     [
-                        'title'  => 'Form1',
-                        'url'    => '#',
-                        'active' => false
+                        'title'  => 'Horizontal Form (Profile)',
+                        'url'    => route('profile.show'),
+                        'active' => isActive('profile.show')
                      ],
                      [
-                         'title'  => 'Form2',
-                         'url'    => '#',
-                         'active' => false
+                         'title'  => 'Vertical Form (Create Product)',
+                         'url'    => route('user.create'),
+                         'active' => isActive('user.create')
                     ]
                 ]
             "

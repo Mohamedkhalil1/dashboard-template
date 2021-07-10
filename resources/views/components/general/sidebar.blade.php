@@ -3,7 +3,7 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="{{ route('profile.show') }}">
+                    <a href="{{ route('dashboard') }}">
                         <img src='{{asset('assets/images/logo/logo.png')}}' alt="Logo" srcset="">
                     </a>
                 </div>

@@ -13,17 +13,25 @@ class Login extends Component
     public $password;
     public $rememberMe;
 
+    protected $rules = [
+        'email'    => ['required', 'email'],
+        'password' => ['required'],
+    ];
+
     public function render()
     {
-        return view('livewire.auth.login');
+        return view('livewire.auth.login')
+            ->extends('layouts.auth')
+            ->section('content');
     }
 
     public function login()
     {
-
-        if ($this->attemptLogin($this)) {
-            return $this->sendLoginResponse($this);
+        $credentials = $this->validate();
+        if (!auth()->attempt($credentials, $this->rememberMe)) {
+            $this->addError('email', trans('auth.failed'));
+            return;
         }
+        return redirect()->route('dashboard');
     }
-
 }
