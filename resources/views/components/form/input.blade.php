@@ -17,8 +17,8 @@
 @endif
         <input
             class="form-control {{$class}} @error($name) is-invalid @enderror"
+            {{ $attributes }}
             type='{{$type}}'
-            name='{{$name}}'
             {{ $required ? 'required' : '' }}
             @if($isLivewire)
             {{ $lazy ? "wire:model.lazy=$name" :  "wire:model=$name" }}

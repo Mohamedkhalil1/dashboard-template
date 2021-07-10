@@ -1,10 +1,10 @@
-@props(['title'=>'' , 'height'=>150 , 'name' , 'placeholder' => '', 'required' => false])
+@props(['title'=>'' , 'height'=> 150 , 'name' , 'placeholder' => '', 'required' => false])
 @php
     $required = $required ? 'required' : '';
 @endphp
 <div class="form-floating">
 <textarea class="form-control"
-          wire:model="{{ $name }}"
+          {{ $attributes }}
           style="height:{{ $height }}px"
           {{ $required }}
           placeholder="{{ $placeholder }}"></textarea>

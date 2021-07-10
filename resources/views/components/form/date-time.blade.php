@@ -1,7 +1,7 @@
 @props(['name','class'=>''])
 <div
     x-data
-    x-init="new Pikaday({ field: $refs.{{$name}} ,  format: 'MM/DD/YYYY', })">
+    x-init="new Pikaday({ field: $refs.{{$name}} ,  format: 'YYYY/MM/DD', })">
     <input
         x-ref="{{ $name }}"
         {{ $attributes }}

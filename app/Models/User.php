@@ -19,7 +19,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'about',
+        'birthday',
+        'has_job',
+        'gender',
+        'social_status',
+        'avatar',
     ];
 
     /**
@@ -41,10 +46,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function getAvatar($path): string
+    public function getAvatar(): string
     {
-        if ($path) {
-            return Storage::disk('files')->url($path);
+        if ($this->avatar) {
+            return Storage::disk('files')->url($this->avatar);
         }
         return '';
     }

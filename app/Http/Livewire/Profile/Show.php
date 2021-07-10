@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Profile;
 
+use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,17 +15,14 @@ class Show extends Component
     public $saved = false;
     public $name;
     public $email;
-    public $password;
-    public $passwordConfirmation;
+    public $password = '';
+    public $passwordConfirmation = '';
     public $user;
-    public $genderTypes;
     public $gender;
-    public $socialStatus;
-    public $hasJob;
-    public $aboutYou;
-    public $count = 0;
+    public $has_job;
+    public $about;
     public $birthday;
-    public $richEditor;
+    public $social_status;
     public $avatar;
     public $newAvatar;
 
@@ -33,18 +31,11 @@ class Show extends Component
         $this->user = auth()->user();
         $this->name = $this->user->name;
         $this->email = $this->user->email;
-        $this->richEditor="asdhsadsad";
-        $this->genderTypes = [
-            [
-                'id'    => 1,
-                'value' => 'Male',
-            ],
-            [
-                'id'    => 2,
-                'value' => 'Female',
-            ],
-        ];
-
+        $this->about = $this->user->about;
+        $this->birthday = $this->user->birthday;
+        $this->has_job = $this->user->has_job;
+        $this->gender = $this->user->gender;
+        $this->social_status = $this->user->social_status;
     }
 
     public function render()
@@ -61,31 +52,16 @@ class Show extends Component
         ]);
     }
 
-//    public function updatedAvatar()
-//    {
-//    }
-
     public function save()
     {
-
         $this->validation();
-        $this->newAvatar = $this->avatar->store('/', 'files');
+        $this->avatar && $this->newAvatar = $this->avatar->store('/', 'files');
         $this->updateUser();
-//        $this->emitSelf();
         $this->dispatchBrowserEvent('notify', ['message' => 'Profile has been saved successfully!', 'color' => '#4fbe87']);
         $this->password = $this->passwordConfirmation = '';
 
     }
 
-    public function setGender($value)
-    {
-//        $this->gender = $value['value'];
-    }
-
-    public function setBirthday()
-    {
-        $this->dispatchBrowserEvent('datepicker', 'birthday');
-    }
 
     private function validation()
     {
@@ -99,9 +75,16 @@ class Show extends Component
 
     private function updateUser(): void
     {
+        $birthday = Carbon::parse($this->birthday);
         $this->user->update([
-            'email' => $this->email,
-            'name'  => $this->name,
+            'name'          => $this->name,
+            'email'         => $this->email,
+            'about'         => $this->about,
+            'birthday'      => $birthday,
+            'has_job'       => $this->has_job,
+            'gender'        => $this->gender,
+            'social_status' => $this->social_status,
+            'avatar'        => $this->newAvatar,
         ]);
         if ($this->password) {
             $this->user->password = bcrypt($this->password);
