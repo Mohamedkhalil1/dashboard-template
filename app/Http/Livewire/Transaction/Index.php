@@ -3,22 +3,22 @@
 namespace App\Http\Livewire\Transaction;
 
 use App\Models\Transaction;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public string $pageTitle = 'Transactions';
-    public Collection $transactions;
+    use WithPagination;
 
-    public function mount()
-    {
-        $this->transactions = Transaction::all();
-    }
+    public string $pageTitle = 'Transactions';
+//    public LengthAwarePaginator $transactions;
+
 
     public function render()
     {
-        return view('livewire.transaction.index')
+        return view('livewire.transaction.index', [
+            'transactions' => Transaction::paginate(),
+        ])
             ->extends('layouts.app')
             ->section('content');
     }

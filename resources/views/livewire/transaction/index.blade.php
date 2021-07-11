@@ -18,15 +18,18 @@
                         </x-table.cell>
                         <x-table.cell class="text-muted">{{ $transaction->amount }} $ </x-table.cell>
                         <x-table.cell class="text-muted">
-                            <x-base.badge type="success">
-                                {{ $transaction->status }}
+                            <x-base.badge type="{{\App\Enums\Status::getColor($transaction->status)  }}">
+                                {{ \App\Enums\Status::name($transaction->status) }}
                             </x-base.badge>
                         </x-table.cell>
-                        <x-table.cell class="text-muted">{{ $transaction->date }}</x-table.cell>
+                        <x-table.cell class="text-muted">{{ dateFormat($transaction->date) }}</x-table.cell>
                     </x-table.row>
                 @endforeach
             </x-slot>
         </x-base.table>
+        <nav aria-label="Page navigation example">
+            {{ $transactions->links() }}
+        </nav>
     </x-base.card>
 
 </div>

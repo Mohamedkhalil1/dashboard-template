@@ -11,4 +11,8 @@ class Transaction extends Model
 
     protected $fillable = ['title', 'amount', 'status', 'date'];
 
+//    protected $casts = [
+//        'date' => 'date',
+//    ];
+
 }
