@@ -32,12 +32,13 @@ class Index extends Component
     public function render()
     {
 //        sleep(1);
-        return view('livewire.transaction.index', [
-            /* search function you can get it in AppServiceProvider as macro*/
-            'transactions' => Transaction::search('title', $this->search)
-                ->orderBy($this->sortField, $this->sortDirection)
-                ->paginate(),
-        ])
+        return view('livewire.transaction.index',
+            [
+                /* search function you can get it in AppServiceProvider as macro*/
+                'transactions' => Transaction::search('title', $this->search)
+                    ->orderBy($this->sortField, $this->sortDirection)
+                    ->paginate(),
+            ])
             ->extends('layouts.app')
             ->section('content');
     }

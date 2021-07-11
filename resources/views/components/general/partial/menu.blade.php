@@ -9,7 +9,7 @@
             :isSingle="true"/>
 
         <x-menu-item
-            title="Form"
+            title="Forms"
             icon="bi bi-file-earmark-medical-fill"
             :isSingle="false"
             :items="
@@ -28,6 +28,20 @@
             "
         />
 
+        <x-menu-item
+            title="Tables"
+            icon="bi bi-grid-1x2-fill"
+            :isSingle="false"
+            :items="
+                [
+                    [
+                        'title'  => 'Simple Table(Transactions)',
+                        'url'    => route('transaction.index'),
+                        'active' => isActive('transaction.index')
+                     ],
+                ]
+            "
+        />
     </ul>
 </div>
 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

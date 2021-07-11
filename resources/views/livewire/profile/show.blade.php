@@ -99,7 +99,7 @@
                 @if($user->avatar)
                     <x-base.avatar imageUrl="{{ $user->getAvatar() }}"/>
                 @endif
-                <x-form.upload-photo name="newAvatar"/>
+                <x-form.upload-photo name="avatar"/>
 
             </x-form.form-group>
 

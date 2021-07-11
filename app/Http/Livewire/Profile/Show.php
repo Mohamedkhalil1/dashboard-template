@@ -36,6 +36,7 @@ class Show extends Component
         $this->has_job = $this->user->has_job;
         $this->gender = $this->user->gender;
         $this->social_status = $this->user->social_status;
+        $this->newAvatar= $this->user->avatar;
     }
 
     public function render()
@@ -61,7 +62,6 @@ class Show extends Component
         $this->password = $this->passwordConfirmation = '';
 
     }
-
 
     private function validation()
     {
