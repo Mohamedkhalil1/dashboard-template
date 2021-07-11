@@ -24,7 +24,7 @@ class TransactionFactory extends Factory
         return [
             'title'  => rtrim(ucfirst($this->faker->text(20)), '.'),
             'amount' => $this->faker->numberBetween(1000, 500000),
-            'status' => $this->faker->boolean,
+            'status' => $this->faker->numberBetween(1,3),
             'date'   => $this->faker->dateTimeBetween('-20 days', '-10 days'),
         ];
     }

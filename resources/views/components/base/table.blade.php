@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-lg">
+    <table class="table table-lg table-bordered">
         <thead>
         <tr>
             {{ $head }}

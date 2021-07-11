@@ -6,16 +6,16 @@ namespace App\Enums;
 
 class Status extends BaseEnum
 {
-    const PROCESSING = 0;
-    const SUCCESS = 1;
-    const DECLINE = 2;
+    const PROCESSING = 1;
+    const SUCCESS = 2;
+    const FAILED = 3;
 
     protected static function labels(): array
     {
         return [
             self::PROCESSING => __('Processing'),
             self::SUCCESS       => __('Success'),
-            self::DECLINE    => __('Decline'),
+            self::FAILED    => __('Failed'),
         ];
     }
 
@@ -23,10 +23,10 @@ class Status extends BaseEnum
     {
         switch ($status) {
             case self::PROCESSING:
-                return 'warning';
+                return 'secondary';
             case self::SUCCESS:
                 return 'success';
-            case self::DECLINE:
+            case self::FAILED:
                 return 'danger';
             default:
                 return '';

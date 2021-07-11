@@ -1,4 +1,4 @@
 @props(['value'])
-<td {{ $attributes }}>
+<td {{$attributes->merge(['class' => 'text-muted'])}} >
     {{ $slot }}
 </td>

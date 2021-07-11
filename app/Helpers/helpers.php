@@ -12,7 +12,7 @@ function isActive(string $route, string $activeClass = 'active', string $notActi
     }
 }
 
-function dateFormat($date): string
+function formatDate($date): string
 {
     try {
         $date = Carbon::parse($date);
@@ -21,4 +21,13 @@ function dateFormat($date): string
         report($exception);
         return $date;
     }
+}
+
+
+function formatMoney($amount)
+{
+    if (!$amount) {
+        return $amount;
+    }
+    return '$ ' . $amount . ' EGP';
 }
