@@ -25,6 +25,8 @@
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.svg')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{asset('assets/vendors/toastify/toastify.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/choices.js/choices.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendors/fontawesome/all.min.css')}}">
+
     <title>
         @yield('title') - {{ config('app.name') }}
     </title>
