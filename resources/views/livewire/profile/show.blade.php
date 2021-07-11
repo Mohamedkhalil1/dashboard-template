@@ -2,12 +2,6 @@
     @section('title',$pageTitle)
     <x-base.card title="{{ $pageTitle }}">
         <x-form.form action="save" :isHorizontal="true">
-            <div class="col-md-4">
-                <x-form.label title="Birthday"/>
-            </div>
-            <x-form.form-group col="8">
-                <x-form.date-time id="birthday" name="birthday" type="text" placeholder="MM/DD/YYYY"/>
-            </x-form.form-group>
 
             <div class="col-md-4">
                 <x-form.label title="Name"/>
@@ -59,10 +53,17 @@
             </x-form.form-group>
 
             <div class="col-md-4">
+                <x-form.label title="Birthday"/>
+            </div>
+            <x-form.form-group col="8">
+                <x-form.date-time id="birthday" name="birthday" type="text" placeholder="MM/DD/YYYY"/>
+            </x-form.form-group>
+
+            <div class="col-md-4">
                 <x-form.label :required="false" title="Gender"/>
             </div>
             <x-form.form-group col="8">
-                <x-form.select name="gender" :options="$genderTypes" selectTitle="Select Gender" wire:model="gender"
+                <x-form.select value="{{ $gender }}" name="gender" :options="\App\Enums\Gender::keyValue()" selectTitle="Select Gender" wire:model="gender"
                                wire:ignore/>
             </x-form.form-group>
 
@@ -70,44 +71,36 @@
                 <x-form.label :required="false" title="Social Status"/>
             </div>
             <x-form.form-group col="8">
-                <x-form.radio-button name="socialStatus" title="Single"/>
-                <x-form.radio-button name="socialStatus" title="Married"/>
+                @foreach(\App\Enums\SocialStatus::keyValue() as $socialStatus)
+                    <x-form.radio-button name="social_status" wire:model="social_status" value="{{ $socialStatus['id'] }}"
+                                         title="{{ $socialStatus['name'] }}"/>
+                @endforeach
             </x-form.form-group>
 
             <div class="col-md-4">
                 <x-form.label :required="false" title="Has Job ?"/>
             </div>
             <x-form.form-group col="8">
-                <x-form.checkbox name="hasJob" title="Yes ,I have a job"/>
+                <x-form.checkbox name="has_job" title="Yes ,I have a job"/>
             </x-form.form-group>
 
             <div class="col-md-4">
                 <x-form.label :required="false" title="About you"/>
             </div>
             <x-form.form-group col="8">
-                <x-form.textarea name="aboutYou" title="About Me" placeholder="about me"/>
-            </x-form.form-group>
-
-            <div class="col-md-4">
-                <x-form.label :required="false" title="About you"/>
-            </div>
-            <x-form.form-group col="8">
-                <x-form.rich-text name="richEditor" initalValues="{{ $richEditor }}" wire:model.lazy="richEditor"/>
+                <x-form.textarea   wire:model="about" title="about"/>
+{{--                <x-form.rich-text name="about" inital-values="{{ $about }}" wire:model.lazy="about"/>--}}
             </x-form.form-group>
 
             <div class="col-md-4">
                 <x-form.label :required="false" title="User Avatar"/>
             </div>
             <x-form.form-group col="8">
-{{--                @if($avatar)--}}
-{{--                    <x-base.avatar imageUrl="{{ \App\Models\User::getAvatar($newAvatar) }}"/>--}}
-{{--                @endif--}}
-{{--                <input type="file" style="display: none;" id="file" wire:model="avatar">--}}
-{{--                    <x-form.label for="file" class="tox-cursor-format-painter btn btn-primary" :required="false" title="change" />--}}
-                <x-form.upload-photo name="avatar"/>
-                <span class="text-danger">
-                   @error('avatar') {{ $message }} @enderror
-               </span>
+                @if($user->avatar)
+                    <x-base.avatar imageUrl="{{ $user->getAvatar() }}"/>
+                @endif
+                <x-form.upload-photo name="newAvatar"/>
+
             </x-form.form-group>
 
             <div class="col-sm-12 d-flex justify-content-end">

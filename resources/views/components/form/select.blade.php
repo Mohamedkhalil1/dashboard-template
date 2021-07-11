@@ -16,7 +16,7 @@
         </option>
         @foreach($options as $option)
             <option
-                {{ $isDisabled ? 'disabled' : '' }} {{ $option['id'] == $value ? 'selected' : '' }} value="{{ $option['id'] }}">{{ $option['value'] }}</option>
+                {{ $isDisabled ? 'disabled' : '' }} {{ $option['id'] == $value ? 'selected' : '' }} value="{{ $option['id'] }}">{{ $option['name'] }}</option>
         @endforeach
     </select>
 </div>

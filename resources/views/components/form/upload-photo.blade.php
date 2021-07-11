@@ -61,6 +61,9 @@
             });"
 >
     <input {{ $attributes }} type="file" class="image-resize-filepond">
+    <span class="text-danger">
+                   @error('newAvatar') {{ $message }} @enderror
+               </span>
 </div>
 
 @push('head')

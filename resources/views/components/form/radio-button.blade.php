@@ -1,18 +1,18 @@
 @props([
     'title',
     'name',
-    'class' => ''
+    'value'=>'',
+    'class'  => ''
 ])
 
 <div class="form-check">
     <input
-        wire:model="{{ $name }}"
+        {{ $attributes }}
         class="form-check-input {{ $class }}"
         type="radio"
-        id="{{ $title }}"
-        value="{{ $title }}">
+        value="{{ $value }}">
 
-    <label class="form-check-label" for="{{ $title }}">
+    <label class="form-check-label" for="{{ $value }}">
         {{ $title }}
     </label>
 </div>
