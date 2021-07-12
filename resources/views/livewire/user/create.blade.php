@@ -22,7 +22,9 @@
             </x-form.form-group>
 
             <div class="col-sm-12 d-flex justify-content-end">
-                <x-base.button type="submit" title="Submit" class="primary me-1 mb-1"/>
+                <x-base.button type="submit" class="primary me-1 mb-1">
+                   <x-icons.money /> Submit
+                </x-base.button>
             </div>
         </x-form.form>
     </x-base.card>

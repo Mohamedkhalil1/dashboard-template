@@ -36,13 +36,7 @@ class Show extends Component
         $this->has_job = $this->user->has_job;
         $this->gender = $this->user->gender;
         $this->social_status = $this->user->social_status;
-    }
-
-    public function render()
-    {
-        return view('livewire.profile.show')
-            ->extends('layouts.app')
-            ->section('content');
+        $this->newAvatar = $this->user->avatar;
     }
 
     public function updated()
@@ -62,7 +56,6 @@ class Show extends Component
 
     }
 
-
     private function validation()
     {
         $this->validate([
@@ -70,6 +63,7 @@ class Show extends Component
             'name'     => ['required', 'string', 'max:255'],
             'password' => ['nullable', 'min:6', 'same:passwordConfirmation'],
             'avatar'   => ['nullable', 'image', 'max:20'],
+            'birthday' => ['required']
         ]);
     }
 
@@ -90,6 +84,13 @@ class Show extends Component
             $this->user->password = bcrypt($this->password);
             $this->user->save();
         }
+    }
+
+    public function render()
+    {
+        return view('livewire.profile.show')
+            ->extends('layouts.app')
+            ->section('content');
     }
 
 }

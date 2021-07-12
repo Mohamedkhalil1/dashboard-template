@@ -1,22 +1,19 @@
 @props([
-    'name'            => '',
     'selectTitle'     => 'Select Items',
-    'class'           => 'select2' ,
-    'col'             => '12',
     'options'         => [],
-    'value'           => '',
     'required'        => false,
-    'isDisabled'     =>  false
+    'isDisabled'      => false,
+    'name'            => ''
 ])
 
-<div {{ $attributes }}>
-    <select class="choices form-select" x-data @change="$dispatch('input',$event.target.value)">
-        <option value="0">
-            {{ $selectTitle }}
-        </option>
-        @foreach($options as $option)
-            <option
-                {{ $isDisabled ? 'disabled' : '' }} {{ $option['id'] == $value ? 'selected' : '' }} value="{{ $option['id'] }}">{{ $option['name'] }}</option>
-        @endforeach
-    </select>
-</div>
+<select {{ $attributes }} class="form-select">
+    <option value="0">
+        {{ $selectTitle }}
+    </option>
+    @foreach($options as $option)
+        <option
+            {{ $isDisabled ? 'disabled' : '' }} value="{{ $option['id'] }}">{{ $option['name'] }}</option>
+    @endforeach
+</select>
+
+@error($name)<span class="text-danger">{{ $message }}</span>@enderror

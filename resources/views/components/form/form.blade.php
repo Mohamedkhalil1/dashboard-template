@@ -2,7 +2,7 @@
 @php
     $class = $isHorizontal  ? 'form-horizontal' : '';
 @endphp
-<form wire:submit.prevent="{{ $action }}" class="form {{ $class }}">
+<form {{ $attributes }} wire:submit.prevent="{{ $action }}" class="form {{ $class }}">
     <div class="form-body">
         <div class="row">
             {{ $slot }}

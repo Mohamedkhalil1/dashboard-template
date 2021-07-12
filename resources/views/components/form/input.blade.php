@@ -16,8 +16,9 @@
     <div class="input-group mb-3">
 @endif
         <input
-            class="form-control {{$class}} @error($name) is-invalid @enderror"
+            name="{{$name}}"
             {{ $attributes }}
+            class="form-control {{$class}} @error($name) is-invalid @enderror"
             type='{{$type}}'
             {{ $required ? 'required' : '' }}
             @if($isLivewire)

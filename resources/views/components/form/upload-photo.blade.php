@@ -33,15 +33,6 @@
                 FilePondPluginImageResize,
             );
 
-            // Filepond: Basic
-            FilePond.create(document.querySelector('.basic-filepond'), {
-                allowImagePreview: false,
-                allowMultiple    : false,
-                allowFileEncode  : false,
-                required         : false
-            });
-
-
             // Filepond: Image Resize
             FilePond.create(document.querySelector('.image-resize-filepond'), {
                 allowImagePreview         : true,
