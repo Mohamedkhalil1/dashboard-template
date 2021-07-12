@@ -56,14 +56,15 @@
                 <x-form.label title="Birthday"/>
             </div>
             <x-form.form-group col="8">
-                <x-form.date-time id="birthday" name="birthday" type="text" placeholder="MM/DD/YYYY"/>
+                <x-form.date-time id="birthday" name="birthday" wire:model="birthday" type="text" placeholder="MM/DD/YYYY"/>
             </x-form.form-group>
 
             <div class="col-md-4">
                 <x-form.label :required="false" title="Gender"/>
             </div>
             <x-form.form-group col="8">
-                <x-form.select value="{{ $gender }}" name="gender" :options="\App\Enums\Gender::keyValue()" selectTitle="Select Gender" wire:model="gender"
+                <x-form.select2 value="{{ $gender }}" name="gender" :options="\App\Enums\Gender::keyValue()"
+                               selectTitle="Select Gender" wire:model="gender"
                                wire:ignore/>
             </x-form.form-group>
 
@@ -72,7 +73,8 @@
             </div>
             <x-form.form-group col="8">
                 @foreach(\App\Enums\SocialStatus::keyValue() as $socialStatus)
-                    <x-form.radio-button name="social_status" wire:model="social_status" value="{{ $socialStatus['id'] }}"
+                    <x-form.radio-button name="social_status" wire:model="social_status"
+                                         value="{{ $socialStatus['id'] }}"
                                          title="{{ $socialStatus['name'] }}"/>
                 @endforeach
             </x-form.form-group>
@@ -88,8 +90,8 @@
                 <x-form.label :required="false" title="About you"/>
             </div>
             <x-form.form-group col="8">
-                <x-form.textarea   wire:model="about" title="about"/>
-{{--                <x-form.rich-text name="about" inital-values="{{ $about }}" wire:model.lazy="about"/>--}}
+                <x-form.textarea wire:model="about" title="about"/>
+                {{--                <x-form.rich-text name="about" inital-values="{{ $about }}" wire:model.lazy="about"/>--}}
             </x-form.form-group>
 
             <div class="col-md-4">
@@ -104,7 +106,9 @@
             </x-form.form-group>
 
             <div class="col-sm-12 d-flex justify-content-end">
-                <x-base.button type="submit" title="Submit" class="primary me-1 mb-1"/>
+                <x-base.button type="submit" class="primary me-1 mb-1">
+                    Submit
+                </x-base.button>
             </div>
         </x-form.form>
     </x-base.card>

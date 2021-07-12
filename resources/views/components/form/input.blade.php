@@ -16,6 +16,7 @@
     <div class="input-group mb-3">
 @endif
         <input
+            name="{{$name}}"
             {{ $attributes }}
             class="form-control {{$class}} @error($name) is-invalid @enderror"
             type='{{$type}}'

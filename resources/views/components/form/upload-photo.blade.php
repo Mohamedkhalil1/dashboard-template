@@ -33,8 +33,6 @@
                 FilePondPluginImageResize,
             );
 
-
-
             // Filepond: Image Resize
             FilePond.create(document.querySelector('.image-resize-filepond'), {
                 allowImagePreview         : true,
