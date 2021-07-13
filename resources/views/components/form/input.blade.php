@@ -13,7 +13,7 @@
 ])
 
 @if($inputGroupText)
-    <div class="input-group mb-3">
+    <div class="input-group">
 @endif
         <input
             name="{{$name}}"

@@ -19,17 +19,6 @@ class Create extends Component
         $this->showCloseProductsCards = false;
     }
 
-    public function render()
-    {
-        return view('livewire.user.create')->extends('layouts.app')->section('content');
-    }
-
-
-    public function notify($message = 'saved', $color = "#4fbe87")
-    {
-        $this->dispatchBrowserEvent('notify', ['message' => $message, 'color' => $color]);
-    }
-
     public function createOrUpdate()
     {
         $array1 = explode(',', $this->name);
@@ -68,5 +57,15 @@ class Create extends Component
             unset($this->products[$key]);
         }
         $this->notify('product is removed successfully', '#dc3545');
+    }
+
+    public function notify($message = 'saved', $color = "#4fbe87")
+    {
+        $this->dispatchBrowserEvent('notify', ['message' => $message, 'color' => $color]);
+    }
+
+    public function render()
+    {
+        return view('livewire.user.create')->extends('layouts.app')->section('content');
     }
 }

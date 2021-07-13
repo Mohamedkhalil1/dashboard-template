@@ -1,4 +1,4 @@
 @props(['type'])
-<span class="badge bg-light-{{$type}}">
+<span class="badge bg-{{$type}}">
     {{ $slot }}
 </span>

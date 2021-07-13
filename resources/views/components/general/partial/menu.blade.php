@@ -39,6 +39,11 @@
                         'url'    => route('transaction.index'),
                         'active' => isActive('transaction.index')
                      ],
+                      [
+                        'title'  => 'Advanced Table(Transactions)',
+                        'url'    => route('transaction.advanced-index'),
+                        'active' => isActive('transaction.advanced-index')
+                     ],
                 ]
             "
         />
