@@ -1,4 +1,4 @@
 @props(['col' => 6])
-<div class="col-md-{{$col}}" {{ $attributes }}>
-{{ $slot }}
+<div {{ $attributes->merge(['class' =>  "col-md-$col"]) }}>
+    {{ $slot }}
 </div>

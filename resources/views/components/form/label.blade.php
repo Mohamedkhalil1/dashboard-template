@@ -1,10 +1,9 @@
 @props([
     'title'       => '',
-    'class'       => '',
     'required'    => true
 ])
 
-<label {{ $attributes }} class="{{ $class }}">
+<label {{ $attributes }}>
     {{ $title }}
     @if($required)
         <span class="text-danger">*</span>

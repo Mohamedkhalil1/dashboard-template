@@ -6,8 +6,8 @@
     'name'            => ''
 ])
 
-<select {{ $attributes }} class="form-select">
-    <option value="0">
+<select {{ $attributes->merge(['class' => 'form-select']) }}>
+    <option value="" selected readonly>
         {{ $selectTitle }}
     </option>
     @foreach($options as $option)
