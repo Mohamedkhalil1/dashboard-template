@@ -40,7 +40,10 @@ trait WithBulkActions
 
     public function selectPageRows()
     {
-        return $this->selected = $this->rows->pluck('id')->map(fn($id) => (string)$id)->toArray();
+        if($this->selectedPage || $this->selectedAll){
+            return $this->selected = $this->rows->pluck('id')->map(fn($id) => (string)$id)->toArray();
+        }
+       return;
     }
 
     public function getSelectedRowsQuery()

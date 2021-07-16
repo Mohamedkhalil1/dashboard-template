@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Transaction;
 
 use App\Http\Livewire\Datatable\WithBulkActions;
+use App\Http\Livewire\Datatable\WithCachedRows;
 use App\Http\Livewire\Datatable\WithPerPagePagination;
 use App\Http\Livewire\Datatable\WithSorting;
 use App\Models\Transaction;
@@ -11,12 +12,13 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AdvancedIndex extends Component
 {
-    use WithPerPagePagination, WithSorting, WithBulkActions;
+    use WithPerPagePagination, WithSorting, WithBulkActions, WithCachedRows;
 
     public string $pageTitle = 'Advanced Transactions';
     public bool $showAdvancedSearch = false;
     public Transaction $transaction;
-    protected $queryString = ['sortField', 'sortDirection', 'filters'];
+    protected $queryString = ['sortField', 'sortDirection', 'filters' ,'id'];
+    protected $listeners = ['resfreshTransactions', '$refresh'];
     public array $filters = [
         'search'     => '',
         'status'     => '',
@@ -61,11 +63,13 @@ class AdvancedIndex extends Component
 
     public function edit($transactionId)
     {
+        $this->useCachedRows();
         $this->transaction = Transaction::find($transactionId);
     }
 
     public function create()
     {
+        $this->useCachedRows();
         $this->transaction = new Transaction();
     }
 
@@ -78,6 +82,7 @@ class AdvancedIndex extends Component
 
     public function toggleAdvancedSearch(): void
     {
+        $this->useCachedRows();
         $this->showAdvancedSearch = !$this->showAdvancedSearch;
     }
 
@@ -122,7 +127,9 @@ class AdvancedIndex extends Component
 
     public function getRowsProperty()
     {
-        return $this->applyPaginatation($this->rowsQuery);
+       return $this->cache(function () {
+            return $this->applyPaginatation($this->rowsQuery);
+        });
     }
 
     public function render()

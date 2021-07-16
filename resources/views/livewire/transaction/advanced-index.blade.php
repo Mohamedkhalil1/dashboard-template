@@ -42,48 +42,34 @@
             </x-base.grid-col>
 
             {{--LEFT ACTIONS--}}
-            <x-base.grid-col  style="padding-left:3px" col="6">
-                <x-base.grid>
-                    {{--PERPAGE PAGINATION--}}
-                    <x-base.grid-col col="6">
-                        <x-base.grid>
-                            <x-base.grid-col col="4">
-                            </x-base.grid-col>
-                            <x-base.grid-col col="8">
-                                <x-base.uselect style="float: right; padding: 6px" wire:model="perPage">
-                                    <x-select.option value="10">10</x-select.option>
-                                    <x-select.option value="25">25</x-select.option>
-                                    <x-select.option value="50">50</x-select.option>
-                                </x-base.uselect>
-                            </x-base.grid-col>
-                        </x-base.grid>
-                    </x-base.grid-col>
-                    <x-base.grid-col col="6">
+            <x-base.grid-col style="padding-left:3px" col="6">
+                {{--NEW--}}
+                <x-base.button wire:click="create" style="float: right" data-bs-toggle="modal"
+                               data-bs-target="#transaction">
+                    <x-icons.add/>
+                    New
+                </x-base.button>
+                {{--BulkACTIONS--}}
+                <x-base.dropdown color="secondary" style="float: right" label="Bulk Actions" class="mr-2 ml-2">
+                    <x-dropdown.item>
+                        <x-icons.download class="text-muted"/>
+                        <span style="cursor: pointer" class="text-muted"
+                              wire:click="exportSelected">Export</span>
+                    </x-dropdown.item>
+                    <x-dropdown.item>
+                        <x-icons.delete class="text-muted"/>
+                        <span style="cursor: pointer" class="text-muted"
+                              onclick="confirm('are you sure ?') || event.stopImmediatePropagation()"
+                              wire:click="deleteSelected">Delete</span>
+                    </x-dropdown.item>
+                </x-base.dropdown>
+                {{--PERPAGE PAGINATION--}}
 
-                        <x-base.button wire:click="create" style="float: right" data-bs-toggle="modal"
-                                       data-bs-target="#transaction">
-                            <x-icons.add/>
-                            New
-                        </x-base.button>
-                        {{--BulkACTIONS--}}
-                        <x-base.dropdown color="secondary" style="float: right" label="Bulk Actions" class="mr-2">
-                            <x-dropdown.item>
-                                <x-icons.download class="text-muted"/>
-                                <span style="cursor: pointer" class="text-muted"
-                                      wire:click="exportSelected">Export</span>
-                            </x-dropdown.item>
-                            <x-dropdown.item>
-                                <x-icons.delete class="text-muted"/>
-                                <span style="cursor: pointer" class="text-muted"
-                                      onclick="confirm('are you sure ?') || event.stopImmediatePropagation()"
-                                      wire:click="deleteSelected">Delete</span>
-                            </x-dropdown.item>
-                        </x-base.dropdown>
-
-                    </x-base.grid-col>
-
-
-                </x-base.grid>
+                <x-base.uselect style="float: right; padding: 6px; width:120px" wire:model="perPage">
+                    <x-select.option value="10">10 items</x-select.option>
+                    <x-select.option value="25">25 items</x-select.option>
+                    <x-select.option value="50">50 items</x-select.option>
+                </x-base.uselect>
 
             </x-base.grid-col>
         </x-base.grid>
@@ -142,6 +128,11 @@
                 <x-table.heading>
                     <x-base.checkbox wire:model="selectedPage"/>
                 </x-table.heading>
+
+                <x-table.heading :sortable="true" :direction="$sortDirection" wire:click="sortBy('id')" id="id">
+                    ID
+                </x-table.heading>
+
                 <x-table.heading style="cursor: pointer" :sortable="true" wire:click="sortBy('title')" id="title"
                                  :direction="$sortDirection">
                     Title
@@ -199,6 +190,10 @@
                     <x-table.row wire:key="{{ $transaction->id }}">
                         <x-table.cell>
                             <x-base.checkbox wire:model="selected" value="{{ $transaction->id }}"/>
+                        </x-table.cell>
+
+                        <x-table.cell>
+                            {{ $transaction->id }}
                         </x-table.cell>
 
                         <x-table.cell>
